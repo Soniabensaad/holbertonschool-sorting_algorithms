@@ -1,43 +1,44 @@
 #include "sort.h"
 /**
- * print_list - Prints a list of integers
+ * insertion_sort_list - list of integers
  *
  * @list: The list to be printed
+ * Return: sorts a doubly linked list of integers in ascending order
  */
 
 	void insertion_sort_list(listint_t **list)
 {
-	listint_t *ptr, *tmp;
+	listint_t *pt, *tp;
 
 	if (!list)
 		return;
 
-	ptr = *list;
+	pt = *list;
 
-	while (ptr)
+	while (pt)
 	{
-		while (ptr->next && (ptr->n > ptr->next->n))
+		while (pt->next && (pt->n > pt->next->n))
 		{
-			tmp = ptr->next;
-			ptr->next = tmp->next;
-			tmp->prev = ptr->prev;
+			tp = pt->next;
+			pt->next = tp->next;
+			tp->prev = pt->prev;
 
-			if (ptr->prev)
-				ptr->prev->next = tmp;
+			if (pt->prev)
+				pt->prev->next = tp;
 
-			if (tmp->next)
-				tmp->next->prev = ptr;
+			if (tp->next)
+				tp->next->prev = pt;
 
-			ptr->prev = tmp;
-			tmp->next = ptr;
+			pt->prev = tp;
+			tp->next = pt;
 
-			if (tmp->prev)
-				ptr = tmp->prev;
+			if (tp->prev)
+				pt = tp->prev;
 			else
-				*list = tmp;
+				*list = tp;
 
 			print_list(*list);
 		}
-		ptr = ptr->next;
+		pt = pt->next;
 	}
 }
