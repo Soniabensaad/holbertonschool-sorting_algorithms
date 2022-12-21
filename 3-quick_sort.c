@@ -26,6 +26,7 @@ int partition (int array[], int start, int end)
         
     }
     swap(&array[i + 1], &array[end]);
+   
     return (i + 1);
 }
 void quickSort(int array[], int start, int end)
@@ -48,3 +49,4 @@ void quick_sort(int *array, size_t size)
     quickSort(array, 0, size - 1);
     
 }
+
