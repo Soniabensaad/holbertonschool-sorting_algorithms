@@ -12,7 +12,7 @@ void swap(int *m, int *n)
     *n = swapi;
     
 }
-int partition (int array[], int start, int end)
+int partition (int array[], int start, int end, size_t size)
 {
     int pivot = array[end];
     int i = (start - 1);
@@ -22,20 +22,24 @@ int partition (int array[], int start, int end)
         {
             i++;
             swap(&array[i], &array[j]);
+            if (start != end)
+				print_array(array, size);
         }
         
     }
     swap(&array[i + 1], &array[end]);
+    if (start != end)
+				print_array(array, size);
    
     return (i + 1);
 }
-void quickSort(int array[], int start, int end)
+void quickSort(int array[], int start, int end, size_t size)
 {
     if (start < end)
     {
-        int pivot = partition(array, start, end);
-        quickSort(array, start, pivot - 1);
-        quickSort(array, pivot + 1, end);
+        int pivot = partition(array, start, end, size);
+        quickSort(array, start, pivot - 1, size);
+        quickSort(array, pivot + 1, end, size);
     }
     
 
@@ -46,7 +50,7 @@ void quick_sort(int *array, size_t size)
     {
         return;
     }
-    quickSort(array, 0, size - 1);
+    quickSort(array, 0, size - 1, size);
     
 }
 
