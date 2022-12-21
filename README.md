@@ -2,7 +2,7 @@
 
 ## Resources:books:
 Read or watch:
-* [Big-O Algorithm Complexity Cheat](https://www.bigocheatsheet.com/)
+* [Data structure by Bro Code](https://www.youtube.com/watch?v=Vtckgz38QHs&t=477s&ab_channel=BroCode)
 * [Big O Notation - Ruby Reilly](https://medium.com/@rubyclaroreilly/big-o-notation-f2c0d0e60888)
 * [Sorting Algos with JENNY](https://www.youtube.com/watch?v=o4bAoo_gFBU&list=PLuZ_bd9XlByzTIP5j1aWXo7smCIxvzd2D&ab_channel=Jenny%27sLecturesCSIT)
 * [Complete Beginner's Guide to Big O Notation](https://www.youtube.com/watch?v=kS_gr2_-ws8)
