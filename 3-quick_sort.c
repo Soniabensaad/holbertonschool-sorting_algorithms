@@ -1,56 +1,76 @@
 #include "sort.h"
 
 /**
- * main - Entry point
- *
- * Return: 
- */
-void swap(int *m, int *n)
-{
-    int swapi = *m;
-    *m = *n;
-    *n = swapi;
-    
-}
-int partition (int array[], int start, int end, size_t size)
-{
-    int pivot = array[end];
-    int i = (start - 1);
-    for(int  j = start; j <= end - 1; j++)
-    {
-        if (array[j] <= pivot)
-        {
-            i++;
-            swap(&array[i], &array[j]);
-            if (start != end)
-				print_array(array, size);
-        }
-        
-    }
-    swap(&array[i + 1], &array[end]);
-    if (start != end)
-				print_array(array, size);
-   
-    return (i + 1);
-}
-void quickSort(int array[], int start, int end, size_t size)
-{
-    if (start < end)
-    {
-        int pivot = partition(array, start, end, size);
-        quickSort(array, start, pivot - 1, size);
-        quickSort(array, pivot + 1, end, size);
-    }
-    
+* partition - Lomutu partition scheme for quicksort algorithm
+* @a: Array to sort
+* @l: lowest index of array
+* @h: highest index of array
+* Return: index of pivot
+*/
 
+int partition(int *a, int l, int h)
+{
+	int p, i, j, t;
+	static int size, k;
+
+	if (k == 0)
+		size = h + 1, k++;
+	p = a[h];
+	i = l;
+	for (j = l; j < h; j++)
+	{
+		if (a[j] <= p)
+		{
+			if (i != j)
+			{
+				t = a[i];
+				a[i] = a[j];
+				a[j] = t;
+				print_array(a, size);
+			}
+			i++;
+		}
+	}
+	if (i != h)
+	{
+		t = a[i];
+		a[i] = a[h];
+		a[h] = t;
+		print_array(a, size);
+	}
+
+	return (i);
 }
+
+/**
+* qs - Quicksort recurssive function
+* @a: array to sort
+* @l: lowest index
+* @h: highest index
+*/
+
+void qs(int *a, int l, int h)
+{
+	int p;
+
+	if (l < h)
+	{
+		p = partition(a, l, h);
+		qs(a, l, p - 1);
+		qs(a, p + 1, h);
+	}
+}
+
+
+/**
+* quick_sort - sorts array using quicksort algorithm
+* @array: Array to sort
+* @size: Size of array to sort
+*/
+
 void quick_sort(int *array, size_t size)
 {
-    if (!size || !array)
-    {
-        return;
-    }
-    quickSort(array, 0, size - 1, size);
-    
+	if (array == NULL)
+		return;
+	qs(array, 0, size - 1);
 }
-
