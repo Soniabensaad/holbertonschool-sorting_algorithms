@@ -12,6 +12,7 @@ int partition(int *array, int start, int end)
 {
 	int pivot, i, j, t;
 	static int  size, k;
+    
 	if (k == 0)
 		size = end + 1, k++;
 	pivot = array[end];
