@@ -1,63 +1,63 @@
 #include "sort.h"
 
 /**
-* partition - Lomutu partition scheme for quicksort algorithm
-* @a: Array to sort
-* @l: lowest index of array
-* @h: highest index of array
+* partition - partition schema for quicksort algorithm
+* @array: Array to sort
+* @start: lowest index of array
+* @end: highest index of array
 * Return: index of pivot
 */
 
-int partition(int *a, int l, int h)
+int partition(int *array, int start, int end)
 {
-	int p, i, j, t;
-	static int size, k;
+	int pivot, i, j, t;
+	static int  size, k;
 
 	if (k == 0)
-		size = h + 1, k++;
-	p = a[h];
-	i = l;
-	for (j = l; j < h; j++)
+		size = end + 1, k++;
+	pivot = array[end];
+	i = start;
+	for (j = start; j < end; j++)
 	{
-		if (a[j] <= p)
+		if (array[j] <= pivot)
 		{
 			if (i != j)
 			{
-				t = a[i];
-				a[i] = a[j];
-				a[j] = t;
-				print_array(a, size);
+				t = array[i];
+				array[i] = array[j];
+				array[j] = t;
+				print_array(array, size);
 			}
 			i++;
 		}
 	}
-	if (i != h)
+	if (i != end)
 	{
-		t = a[i];
-		a[i] = a[h];
-		a[h] = t;
-		print_array(a, size);
+		t = array[i];
+		array[i] = array[end];
+		array[end] = t;
+		print_array(array, size);
 	}
 
 	return (i);
 }
 
 /**
-* qs - Quicksort recurssive function
-* @a: array to sort
-* @l: lowest index
-* @h: highest index
+* qs - Quicksort recursive function
+* @array: array to sort
+* @start: lowest index
+* @end: highest index
 */
 
-void qs(int *a, int l, int h)
+void qs(int *array, int start, int end)
 {
-	int p;
+	int pivot;
 
-	if (l < h)
+	if (start < end)
 	{
-		p = partition(a, l, h);
-		qs(a, l, p - 1);
-		qs(a, p + 1, h);
+		pivot = partition(array, start, end);
+		qs(array, start, pivot - 1);
+		qs(array, pivot + 1, end);
 	}
 }
 
