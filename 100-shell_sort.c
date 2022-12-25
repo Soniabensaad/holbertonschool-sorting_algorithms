@@ -1,8 +1,8 @@
 #include "sort.h"
 void shell_sort(int *array, size_t size)
 {
-   long unsigned int  gap = size /2 , i, j;
-     int tpr;
+    size_t gap = size /2 , i, j;
+    int tpr;
    
 	if (!array || size < 2)
     {
