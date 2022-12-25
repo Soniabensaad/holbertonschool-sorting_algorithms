@@ -8,6 +8,10 @@ void shell_sort(int *array, size_t size)
     {
 		return;
     }
+    gap = 1;
+    while (gap < size)
+		gap = (gap * 3) + 1;
+    gap = (gap -1) /3;
     while (gap > 0)
     {
         for (i = gap; i < size; i++)
@@ -22,9 +26,10 @@ void shell_sort(int *array, size_t size)
 
         }
         
-        gap = (gap * 3) + 1;
+        gap = (gap - 1) / 3;
         print_array(array, size);
     }
     
     
 }   
+
