@@ -1,13 +1,15 @@
 #include "sort.h"
 void shell_sort(int *array, size_t size)
 {
-    size_t gap = size /2 , i, j;
+    size_t gap = 1, i, j;
     int tpr;
    
 	if (!array || size < 2)
     {
 		return;
     }
+    while (gap < size / 3)
+		gap = gap * 3 + 1;
     while (gap > 0)
     {
         for (i = gap; i < size; i++)
@@ -22,8 +24,9 @@ void shell_sort(int *array, size_t size)
 
         }
         
-        
+        gap /= 3;
+        print_array(array, size);
     }
-    gap = gap *3 +1;
-    print_array(array, size);
+    
+    
 }   
