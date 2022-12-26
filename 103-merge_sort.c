@@ -3,65 +3,64 @@
 #include <stdio.h>
 
 /**
- * TDMerge - sorts and merges the sub arrays in source
- * @start: starting index (inclusive) for the left sub array
- * @middle: end index (exclusive) for the left sub array and
- * starting index (inclusive) for the right sub array
- * @end: end index (exclusive) for the right sub array
- * @dest: destination for data
- * @source: source of data
+ * Merge_side - sorts and merges the sub arrays in source
+ * @start: starting index
+ * @middle: middle index
+ * @end: end index
+ * @d: destination for data
+ * @s: source of data
  *
  * Return: void
  */
-void TDMerge(size_t start, size_t middle, size_t end, int *dest, int *source)
+void Merge_side(size_t start, size_t middle, size_t end, int *d, int *s)
 {
 	size_t i, j, k;
 
 	printf("Merging...\n");
 	printf("[left]: ");
-	print_array(source + start, middle - start);
+	print_array(s + start, middle - start);
 	printf("[right]: ");
-	print_array(source + middle, end - middle);
+	print_array(s + middle, end - middle);
 	i = start;
 	j = middle;
 	for (k = start; k < end; k++)
 	{
-		if (i < middle && (j >= end || source[i] <= source[j]))
+		if (i < middle && (j >= end || s[i] <= s[j]))
 		{
-			dest[k] = source[i];
+			d[k] = s[i];
 			i++;
 		}
 		else
 		{
-			dest[k] = source[j];
+			d[k] = s[j];
 			j++;
 		}
 	}
 	printf("[Done]: ");
-	print_array(dest + start, end - start);
+	print_array(d + start, end - start);
 }
 
 /**
- * TDSplitMerge - recursively splits the array and merges the sorted arrays
- * @start: starting index (inclusive)
- * @end: end index (exclusive)
+ * Merge_split - splits the array and merges the sorted arrays
+ * @start: starting index
+ * @end: end index
  * @array: the array to sort
- * @copy: a copy of the array
+ * @ptr: a copy of the array
  *
  * Return: void
  */
-void TDSplitMerge(size_t start, size_t end, int *array, int *copy)
+void Merge_split(size_t start, size_t end, int *array, int *ptr)
 {
 	size_t middle;
 
 	if (end - start < 2)
 		return;
 	middle = (start + end) / 2;
-	TDSplitMerge(start, middle, array, copy);
-	TDSplitMerge(middle, end, array, copy);
-	TDMerge(start, middle, end, array, copy);
+	Merge_split(start, middle, array, ptr);
+	Merge_split(middle, end, array, ptr);
+	Merge_side(start, middle, end, array, ptr);
 	for (middle = start; middle < end; middle++)
-		copy[middle] = array[middle];
+		ptr[middle] = array[middle];
 }
 
 /**
@@ -75,15 +74,15 @@ void TDSplitMerge(size_t start, size_t end, int *array, int *copy)
 void merge_sort(int *array, size_t size)
 {
 	size_t i;
-	int *copy;
+	int *ptr;
 
 	if (array == NULL || size < 2)
 		return;
-	copy = malloc(sizeof(int) * size);
-	if (copy == NULL)
+	ptr = malloc(sizeof(int) * size);
+	if (ptr == NULL)
 		return;
 	for (i = 0; i < size; i++)
-		copy[i] = array[i];
-	TDSplitMerge(0, size, array, copy);
-	free(copy);
+		ptr[i] = array[i];
+	Merge_split(0, size, array, ptr);
+	free(ptr);
 }
